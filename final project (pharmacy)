@@ -1,0 +1,156 @@
+""" 
+ Draws the first scene on the canvas and outputs the first
+ section of text for the story.
+"""
+# Create a blue circle with a diameter of 50, a center at 100, 100
+def draw_circle(radius, x, y, color):
+    circ = Circle(radius)
+    circ.set_position(x, y)
+    circ.set_color(color)
+    add(circ)
+
+def draw_rectangle(length, width, x, y, color):
+    rect = Rectangle(length, width)
+    rect.set_position(x, y)
+    rect.set_color(color)
+    add(rect)
+    
+def draw_line(x1, x2, y1, y2, color):
+    line = Line(x1, y1, x2, y2)
+    line.set_color(color)
+    add(line)
+
+def add_text(x, y, message, font):
+    text = Text(message)
+    text.set_position(x,y)
+    text.set_color(Color.black)
+    text.set_font(font)
+    add(text)
+    
+def draw_background():
+    draw_rectangle(get_width(), get_height(), 0, 0, Color.blue)
+    draw_rectangle(get_width(), get_height(), 0, get_height()*3/4, Color.green)
+    
+def draw_harry_potter(face):
+	draw_circle(60, 100, 250, Color.orange) #head
+	draw_circle(25, 70, 250, Color.white) #glasses 1
+	draw_circle(25, 130, 250, Color.white) #glasses 2
+	draw_circle(5, 70, 250, Color.green) #left eye
+	draw_circle(5, 130, 250, Color.green) #right eye
+	draw_rectangle(20, 10, 90, 245, Color.white) #glasses center part
+	draw_line(130, 125, 212, 217, Color.black) #scar
+	draw_line(130, 125, 217, 217, Color.black) #scar
+	draw_line(125, 130, 222, 217, Color.black) #scar
+	draw_rectangle(100, 100, 50, 310, Color.black) #body
+	
+	if face == "normal":
+	    draw_line(80, 120, 285, 285, Color.black) 
+	if face == "surprised":
+	    draw_circle(15, 100, 285, Color.red) #surprised mouth 
+	if face == "smile":
+	    draw_circle(15, 100, 285, Color.red) #surprised mouth
+	    draw_rectangle(30, 10, 85, 270, Color.orange)
+	    
+def draw_magician(face):
+	draw_circle(60, 300, 250, Color.orange) #head
+	draw_rectangle(100, 100, 250, 310, Color.purple) #body
+	draw_circle(15, 270, 250, Color.white) #left eye
+	draw_circle(15, 330, 250, Color.white) #right eye
+	draw_circle(5, 270, 250, Color.blue) #left eye
+	draw_circle(5, 330, 250, Color.blue) #right eye
+	draw_circle(30, 300, 290, Color.gray) #mustache
+	draw_rectangle(95,20,250,200,Color.purple)
+	draw_rectangle(75,20,260,180,Color.purple)
+	draw_rectangle(55,20,270,160,Color.purple)
+	draw_rectangle(25,20,285,140,Color.purple)
+	if face == "normal":
+	    draw_line(280, 320, 285, 285, Color.black) #lip
+	if face == "surprised":
+	    draw_circle(15, 300, 285, Color.red) #surprised mouth
+	if face == "smile":
+	    draw_circle(15, 300, 285, Color.red) #surprised mouth
+	    draw_rectangle(30, 10, 285, 270, Color.gray) #smile
+
+def rabbit():
+    draw_rectangle(40, 40, 210, 320, Color.purple) #arm
+    draw_rectangle(15, 30, 180, 271, Color.white) #left ear
+    draw_rectangle(15, 30, 205, 271, Color.white) #right ear
+    draw_circle(26, 200, 320, Color.white)#face
+    draw_circle(30, 200, 360, Color.white)#body
+    draw_circle(4, 190, 310, Color.black) #left eye 
+    draw_circle(4, 210, 310, Color.black) #right eye 
+    draw_circle(4, 200, 320, Color.black)#nose
+    draw_line(200, 200, 320, 330, Color.black) #nose and lip center
+    draw_line(190, 210, 330, 330, Color.black)#lip 
+    draw_circle(5,232, 365, Color.white)#tail
+    
+def draw_scene1():
+    draw_background()
+    draw_magician("smile")
+    draw_harry_potter("normal")
+    add_text(get_width()/2+20, get_height()/2-150, "Who is he...", "20pt Arial")
+
+""" 
+ Draws the second scene on the canvas and outputs the second
+ section of text for the story.
+"""
+def draw_scene2():
+    draw_background()
+    draw_magician("surprised")
+    draw_harry_potter("smile")
+    add_text(get_width()/2-120, get_height()/2-150, "Hi! Are you Harry Potter?", "20pt Arial")
+    add_text(70, get_height()/2-80, "Yes","20pt Arial")
+
+""" 
+ Draws the third scene on the canvas and outputs the second
+ section of text for the story.
+"""
+def draw_scene3():
+    draw_background()
+    draw_magician("smile")
+    draw_harry_potter("normal")
+    add_text(get_width()/2-100, get_height()/2-120, "I’m want to show you something!", "15pt Arial")
+    add_text(get_width()/2-120, get_height()/2-70, "....", "20pt Arial")
+
+""" 
+ Draws the fourth scene on the canvas and outputs the second
+ section of text for the story.
+"""
+def draw_scene4():
+    draw_background()
+    draw_magician("surprised")
+    draw_harry_potter("surprised")
+    rabbit()
+    add_text(get_width()-140, get_height()/2-150, "Ta-da!", "20pt Arial")
+    add_text(get_width()/2-130, get_height()/2-90, "Wow!", "20pt Arial")
+
+"""
+ This is set up code that makes the story advance from
+ scene to scene. Feel free to check out this code and
+ learn how it works!
+ But be careful! If you modify this code the story might
+ not work anymore.
+"""
+
+scene_counter = 0
+
+# When this function is called the next scene is drawn.
+
+def draw_next_screen(x, y):
+    global scene_counter
+    scene_counter += 1
+
+    if scene_counter == 1:
+        draw_scene1()
+    elif scene_counter == 2:
+        draw_scene2()
+    elif scene_counter == 3:
+        draw_scene3()
+    else:
+        draw_scene4()
+
+welcome = Text("Click to Begin!")
+welcome.set_position(get_width() / 2 - welcome.get_width() / 2, get_height() / 2)
+add(welcome)
+
+add_mouse_click_handler(draw_next_screen)
